@@ -26,6 +26,8 @@ serverApi: {
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 app.post("/api/add", function(req, res) {
     console.log(req.body)
     client.connect().then(() => client.db("seeker-ai").collection("emails").insertOne({ email: req.body.email })).then(() => {
@@ -33,4 +35,6 @@ app.post("/api/add", function(req, res) {
     });
 })
 
-app.listen(3001)
+app.listen(3000)
+
+module.exports = app;
