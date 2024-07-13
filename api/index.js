@@ -7,12 +7,6 @@ const user = {
     password: "5FgCOAreMDQsZruG"
 }
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
 const uri = `mongodb+srv://${user.user}:${user.password}@cluster0.yzwdwqn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 const client = new MongoClient(uri, {
@@ -25,6 +19,12 @@ serverApi: {
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
